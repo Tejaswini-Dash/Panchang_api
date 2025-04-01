@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # from skyfield.api import load, Topos
 # import pytz
 # from datetime import datetime
@@ -132,3 +133,26 @@ def get_sun_position(place: str, date: str):
     altitude, azimuth, _ = astrometric.apparent().altaz()
 
     return round(altitude.degrees, 2), round(azimuth.degrees, 2)
+=======
+from skyfield.api import load
+
+def get_planetary_positions(date_value):
+    """
+    Compute planetary positions using Skyfield.
+    """
+    ts = load.timescale()
+    planets = load('de421.bsp')
+
+    earth, moon, sun = planets['earth'], planets['moon'], planets['sun']
+    observer_time = ts.utc(date_value.year, date_value.month, date_value.day)
+
+    positions = {
+        "sun": earth.at(observer_time).observe(sun).apparent().ecliptic_latlon(),
+        "moon": earth.at(observer_time).observe(moon).apparent().ecliptic_latlon()
+    }
+
+    return {
+        "sun_position": positions["sun"][1].degrees,
+        "moon_position": positions["moon"][1].degrees
+    }
+>>>>>>> b8a42b75d440e17b91f20f3edc6ef857bd7e3483
