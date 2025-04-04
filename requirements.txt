@@ -3,3 +3,8 @@ uvicorn
 skyfield
 pytz
 geopy
+timezonefinder
+geopy
+ephem
+pytz
+astral
